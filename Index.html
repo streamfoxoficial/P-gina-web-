@@ -1,1 +1,568 @@
 
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>StreamFox | Catálogo</title>
+  <style>
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+      font-family:Arial, Helvetica, sans-serif;
+    }
+
+    body{
+      background:
+        radial-gradient(circle at top, rgba(255,106,0,.12), transparent 35%),
+        linear-gradient(180deg, #000000, #0b0b0b 45%, #111111 100%);
+      color:#fff;
+    }
+
+    header{
+      text-align:center;
+      padding:32px 18px 24px;
+      border-bottom:1px solid rgba(255,106,0,.18);
+      background:linear-gradient(180deg, rgba(255,106,0,.08), rgba(0,0,0,0));
+    }
+
+    .logo{
+      width:210px;
+      max-width:80%;
+      margin-bottom:10px;
+      filter:drop-shadow(0 0 14px rgba(255,106,0,.18));
+    }
+
+    .titulo{
+      font-size:2rem;
+      font-weight:800;
+      color:#ff6a00;
+      letter-spacing:1px;
+      text-shadow:0 0 14px rgba(255,106,0,.25);
+    }
+
+    .subtitulo{
+      color:#d1d1d1;
+      margin-top:8px;
+      font-size:1rem;
+    }
+
+    .hero{
+      max-width:1100px;
+      margin:24px auto 10px;
+      padding:0 16px;
+    }
+
+    .hero-box{
+      background:linear-gradient(145deg, rgba(255,106,0,.10), rgba(255,255,255,.02));
+      border:1px solid rgba(255,106,0,.18);
+      border-radius:20px;
+      padding:22px 18px;
+      text-align:center;
+      box-shadow:0 10px 30px rgba(0,0,0,.35);
+    }
+
+    .hero-box h2{
+      color:#fff;
+      margin-bottom:10px;
+      font-size:1.5rem;
+    }
+
+    .hero-box p{
+      color:#cfcfcf;
+      line-height:1.6;
+      font-size:.98rem;
+    }
+
+    .catalogo-wrap{
+      max-width:1250px;
+      margin:0 auto;
+      padding:22px 16px 50px;
+    }
+
+    .catalogo-titulo{
+      text-align:center;
+      color:#ff6a00;
+      font-size:1.7rem;
+      font-weight:800;
+      margin-bottom:22px;
+    }
+
+    .catalogo{
+      display:grid;
+      grid-template-columns:repeat(auto-fit, minmax(270px, 1fr));
+      gap:22px;
+    }
+
+    .card{
+      background:linear-gradient(180deg, #121212, #171717);
+      border:1px solid rgba(255,106,0,.16);
+      border-radius:20px;
+      overflow:hidden;
+      box-shadow:0 10px 24px rgba(0,0,0,.35);
+      transition:transform .22s ease, box-shadow .22s ease, border-color .22s ease;
+    }
+
+    .card:hover{
+      transform:translateY(-6px);
+      border-color:rgba(255,106,0,.45);
+      box-shadow:0 14px 30px rgba(255,106,0,.14);
+    }
+
+    .card img{
+      width:100%;
+      height:205px;
+      object-fit:cover;
+      display:block;
+      background:#000;
+    }
+
+    .card-body{
+      padding:18px;
+    }
+
+    .card-body h3{
+      color:#fff;
+      font-size:1.18rem;
+      margin-bottom:8px;
+    }
+
+    .badge{
+      display:inline-block;
+      font-size:.78rem;
+      font-weight:700;
+      color:#ffb37a;
+      background:rgba(255,106,0,.10);
+      border:1px solid rgba(255,106,0,.18);
+      padding:6px 10px;
+      border-radius:999px;
+      margin-bottom:12px;
+    }
+
+    .precio{
+      font-size:1.9rem;
+      font-weight:800;
+      color:#ff7a00;
+      margin-bottom:12px;
+      text-shadow:0 0 10px rgba(255,122,0,.18);
+    }
+
+    .descripcion{
+      color:#d2d2d2;
+      font-size:.95rem;
+      line-height:1.55;
+      margin-bottom:12px;
+    }
+
+    .extras{
+      color:#bbbbbb;
+      font-size:.90rem;
+      line-height:1.55;
+      margin-bottom:14px;
+      padding-left:18px;
+    }
+
+    .extras li{
+      margin-bottom:6px;
+    }
+
+    .beneficios{
+      background:rgba(255,255,255,.02);
+      border:1px solid rgba(255,255,255,.05);
+      border-radius:14px;
+      padding:12px 12px 10px;
+      margin-bottom:14px;
+    }
+
+    .beneficios p{
+      color:#d6d6d6;
+      font-size:.9rem;
+      margin-bottom:6px;
+    }
+
+    .pago{
+      color:#9dd3ff;
+      font-size:.88rem;
+      margin-bottom:14px;
+      font-weight:700;
+    }
+
+    .boton{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:10px;
+      width:100%;
+      text-align:center;
+      text-decoration:none;
+      color:#fff;
+      font-weight:800;
+      padding:14px 16px;
+      border-radius:14px;
+      background:linear-gradient(90deg, #ff6a00, #ff8c1a);
+      box-shadow:0 8px 18px rgba(255,106,0,.22);
+      transition:transform .18s ease, filter .18s ease, box-shadow .18s ease;
+    }
+
+    .boton:hover{
+      transform:translateY(-2px) scale(1.01);
+      filter:brightness(1.06);
+      box-shadow:0 12px 22px rgba(255,106,0,.28);
+    }
+
+    .boton span{
+      font-size:1.05rem;
+    }
+
+    .contacto{
+      max-width:900px;
+      margin:0 auto 40px;
+      padding:0 16px;
+    }
+
+    .contacto-box{
+      background:linear-gradient(145deg, rgba(255,106,0,.08), rgba(255,255,255,.02));
+      border:1px solid rgba(255,106,0,.18);
+      border-radius:20px;
+      padding:22px 18px;
+      text-align:center;
+    }
+
+    .contacto-box h3{
+      color:#ff6a00;
+      margin-bottom:10px;
+      font-size:1.4rem;
+    }
+
+    .contacto-box p{
+      color:#d5d5d5;
+      margin-bottom:10px;
+      line-height:1.6;
+    }
+
+    .numero{
+      color:#25D366;
+      font-weight:800;
+      font-size:1.2rem;
+      text-decoration:none;
+    }
+
+    footer{
+      text-align:center;
+      padding:22px 14px 28px;
+      color:#8f8f8f;
+      border-top:1px solid rgba(255,255,255,.05);
+      background:#080808;
+      font-size:.92rem;
+    }
+
+    @media (max-width: 640px){
+      .titulo{
+        font-size:1.7rem;
+      }
+
+      .hero-box h2{
+        font-size:1.25rem;
+      }
+
+      .card img{
+        height:190px;
+      }
+
+      .precio{
+        font-size:1.7rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <img src="logo.png" alt="StreamFox" class="logo">
+    <div class="titulo">STREAMFOX</div>
+    <p class="subtitulo">Catálogo de plataformas y herramientas digitales</p>
+  </header>
+
+  <section class="hero">
+    <div class="hero-box">
+      <h2>Compra rápida, estética premium y atención por WhatsApp</h2>
+      <p>
+        Explora todas las plataformas disponibles con imagen, precio, contenido destacado
+        y botón directo para comprar. Activa tu servicio de forma rápida y segura.
+      </p>
+    </div>
+  </section>
+
+  <section class="catalogo-wrap">
+    <h2 class="catalogo-titulo">Catálogo completo</h2>
+
+    <div class="catalogo">
+
+      <div class="card">
+        <img src="netflix.jpeg" alt="Netflix">
+        <div class="card-body">
+          <span class="badge">NETFLIX ORIGINAL · PERFIL PERSONAL · 33 DÍAS</span>
+          <h3>Netflix</h3>
+          <div class="precio">$17.000</div>
+          <p class="descripcion">La plataforma de streaming más popular del mundo con miles de series, películas y documentales exclusivos. Perfecta para maratones y estrenos constantes.</p>
+          <ul class="extras">
+            <li><strong>Series famosas:</strong> Stranger Things, La Casa de Papel, Wednesday, Squid Game, The Witcher</li>
+            <li><strong>Recomendadas:</strong> Dark, Breaking Bad, Black Mirror</li>
+          </ul>
+          <div class="beneficios">
+            <p>✅ Perfil personal</p>
+            <p>✅ Garantía durante todo el servicio</p>
+            <p>✅ Activación en máximo 15 minutos</p>
+          </div>
+          <div class="pago">💳 Pagos por Nequi o Daviplata</div>
+          <a class="boton" href="https://wa.me/573508563073?text=Hola,%20quiero%20comprar%20Netflix" target="_blank"><span>Comprar por WhatsApp</span></a>
+        </div>
+      </div>
+
+      <div class="card">
+        <img src="disney.jpeg" alt="Disney Plus">
+        <div class="card-body">
+          <span class="badge">DISNEY+ PREMIUM · PERFIL PERSONAL</span>
+          <h3>Disney+</h3>
+          <div class="precio">$10.000</div>
+          <p class="descripcion">Reúne todo el contenido de Disney, Marvel, Pixar y Star Wars en una sola plataforma. Ideal para fans del universo Marvel y entretenimiento familiar.</p>
+          <ul class="extras">
+            <li><strong>Series famosas:</strong> Loki, The Mandalorian, WandaVision</li>
+            <li><strong>Películas recomendadas:</strong> Avengers Endgame, Toy Story, Star Wars</li>
+          </ul>
+          <div class="beneficios">
+            <p>✅ Perfil personal</p>
+            <p>✅ 30 días de servicio</p>
+            <p>✅ Activación inmediata</p>
+          </div>
+          <div class="pago">💳 Pagos por Nequi o Daviplata</div>
+          <a class="boton" href="https://wa.me/573508563073?text=Hola,%20quiero%20comprar%20Disney%2B" target="_blank"><span>Comprar por WhatsApp</span></a>
+        </div>
+      </div>
+
+      <div class="card">
+        <img src="hbo.jpeg" alt="HBO Max">
+        <div class="card-body">
+          <span class="badge">HBO MAX · PERFIL PERSONAL</span>
+          <h3>HBO Max</h3>
+          <div class="precio">$8.000</div>
+          <p class="descripcion">Conocida por tener algunas de las mejores series de la historia y grandes producciones. Contenido premium para quienes buscan calidad.</p>
+          <ul class="extras">
+            <li><strong>Series famosas:</strong> Game of Thrones, House of the Dragon, The Last of Us, Euphoria</li>
+            <li><strong>Películas recomendadas:</strong> Harry Potter, Joker, Batman</li>
+          </ul>
+          <div class="beneficios">
+            <p>✅ Perfil personal</p>
+            <p>✅ 30 días de servicio</p>
+            <p>✅ Activación en 10-15 minutos</p>
+          </div>
+          <div class="pago">💳 Pagos por Nequi o Daviplata</div>
+          <a class="boton" href="https://wa.me/573508563073?text=Hola,%20quiero%20comprar%20HBO%20Max" target="_blank"><span>Comprar por WhatsApp</span></a>
+        </div>
+      </div>
+
+      <div class="card">
+        <img src="prime.jpeg" alt="Amazon Prime Video">
+        <div class="card-body">
+          <span class="badge">AMAZON PRIME VIDEO · PERFIL PERSONAL</span>
+          <h3>Amazon Prime Video</h3>
+          <div class="precio">$8.000</div>
+          <p class="descripcion">Ofrece series originales, películas populares y estrenos exclusivos. Muy buena opción para acción y entretenimiento variado.</p>
+          <ul class="extras">
+            <li><strong>Series famosas:</strong> The Boys, Invincible, Reacher, Jack Ryan</li>
+            <li><strong>Películas recomendadas:</strong> Creed, The Tomorrow War</li>
+          </ul>
+          <div class="beneficios">
+            <p>✅ Perfil personal</p>
+            <p>✅ 30 días de servicio</p>
+            <p>✅ Activación rápida</p>
+          </div>
+          <div class="pago">💳 Pagos por Nequi o Daviplata</div>
+          <a class="boton" href="https://wa.me/573508563073?text=Hola,%20quiero%20comprar%20Amazon%20Prime%20Video" target="_blank"><span>Comprar por WhatsApp</span></a>
+        </div>
+      </div>
+
+      <div class="card">
+        <img src="crunchyroll.jpeg" alt="Crunchyroll">
+        <div class="card-body">
+          <span class="badge">CRUNCHYROLL PREMIUM · PERFIL PERSONAL</span>
+          <h3>Crunchyroll</h3>
+          <div class="precio">$7.500</div>
+          <p class="descripcion">La plataforma número 1 del mundo para ver anime. Ideal para fans que quieren series populares, estrenos y contenido sin anuncios.</p>
+          <ul class="extras">
+            <li><strong>Animes famosos:</strong> Attack on Titan, Demon Slayer, Naruto, Jujutsu Kaisen</li>
+            <li><strong>Recomendados:</strong> Chainsaw Man, One Piece, Tokyo Revengers</li>
+          </ul>
+          <div class="beneficios">
+            <p>✅ Perfil personal</p>
+            <p>✅ 30 días de servicio</p>
+            <p>✅ Sin anuncios</p>
+          </div>
+          <div class="pago">💳 Pagos por Nequi o Daviplata</div>
+          <a class="boton" href="https://wa.me/573508563073?text=Hola,%20quiero%20comprar%20Crunchyroll" target="_blank"><span>Comprar por WhatsApp</span></a>
+        </div>
+      </div>
+
+      <div class="card">
+        <img src="paramount.jpeg" alt="Paramount Plus">
+        <div class="card-body">
+          <span class="badge">PARAMOUNT+ · PERFIL PERSONAL</span>
+          <h3>Paramount+</h3>
+          <div class="precio">$7.500</div>
+          <p class="descripcion">Ofrece películas populares y series exclusivas. Excelente opción para quienes disfrutan cine, acción y franquicias reconocidas.</p>
+          <ul class="extras">
+            <li><strong>Series famosas:</strong> Halo, Yellowstone, Star Trek</li>
+            <li><strong>Películas recomendadas:</strong> Top Gun, Transformers, Misión Imposible</li>
+          </ul>
+          <div class="beneficios">
+            <p>✅ Perfil personal</p>
+            <p>✅ 30 días de servicio</p>
+            <p>✅ Activación inmediata</p>
+          </div>
+          <div class="pago">💳 Pagos por Nequi o Daviplata</div>
+          <a class="boton" href="https://wa.me/573508563073?text=Hola,%20quiero%20comprar%20Paramount%2B" target="_blank"><span>Comprar por WhatsApp</span></a>
+        </div>
+      </div>
+
+      <div class="card">
+        <img src="apple.jpeg" alt="Apple TV Plus">
+        <div class="card-body">
+          <span class="badge">APPLE TV+ · PERFIL PERSONAL</span>
+          <h3>Apple TV+</h3>
+          <div class="precio">$9.000</div>
+          <p class="descripcion">Destaca por sus series originales premiadas y producciones de alta calidad. Contenido exclusivo y muy bien producido.</p>
+          <ul class="extras">
+            <li><strong>Series famosas:</strong> Ted Lasso, See, The Morning Show, Foundation</li>
+            <li><strong>Recomendadas:</strong> Finch, Greyhound</li>
+          </ul>
+          <div class="beneficios">
+            <p>✅ Perfil personal</p>
+            <p>✅ 30 días de servicio</p>
+            <p>✅ Activación rápida</p>
+          </div>
+          <div class="pago">💳 Pagos por Nequi o Daviplata</div>
+          <a class="boton" href="https://wa.me/573508563073?text=Hola,%20quiero%20comprar%20Apple%20TV%2B" target="_blank"><span>Comprar por WhatsApp</span></a>
+        </div>
+      </div>
+
+      <div class="card">
+        <img src="universal.jpeg" alt="Universal Plus">
+        <div class="card-body">
+          <span class="badge">UNIVERSAL+ · PERFIL PERSONAL</span>
+          <h3>Universal+</h3>
+          <div class="precio">$10.000</div>
+          <p class="descripcion">Reúne series de canales premium y contenido popular. Muy buena para quienes aman series clásicas y franquicias conocidas.</p>
+          <ul class="extras">
+            <li><strong>Series famosas:</strong> The Office, Chicago Fire, Chicago PD</li>
+            <li><strong>Recomendadas:</strong> Dr House, Bates Motel</li>
+          </ul>
+          <div class="beneficios">
+            <p>✅ Perfil personal</p>
+            <p>✅ 30 días de servicio</p>
+            <p>✅ Activación inmediata</p>
+          </div>
+          <div class="pago">💳 Pagos por Nequi o Daviplata</div>
+          <a class="boton" href="https://wa.me/573508563073?text=Hola,%20quiero%20comprar%20Universal%2B" target="_blank"><span>Comprar por WhatsApp</span></a>
+        </div>
+      </div>
+
+      <div class="card">
+        <img src="viki.jpeg" alt="Viki">
+        <div class="card-body">
+          <span class="badge">VIKI · PERFIL PERSONAL</span>
+          <h3>Viki</h3>
+          <div class="precio">$8.000</div>
+          <p class="descripcion">Ideal para ver dramas coreanos y contenido asiático. Perfecta para fans de K-dramas y series románticas populares.</p>
+          <ul class="extras">
+            <li><strong>Series famosas:</strong> True Beauty, Goblin, Descendants of the Sun</li>
+            <li><strong>Recomendadas:</strong> My Love From The Star, What's Wrong With Secretary Kim</li>
+          </ul>
+          <div class="beneficios">
+            <p>✅ Perfil personal</p>
+            <p>✅ 30 días de servicio</p>
+            <p>✅ Activación rápida</p>
+          </div>
+          <div class="pago">💳 Pagos por Nequi o Daviplata</div>
+          <a class="boton" href="https://wa.me/573508563073?text=Hola,%20quiero%20comprar%20Viki" target="_blank"><span>Comprar por WhatsApp</span></a>
+        </div>
+      </div>
+
+      <div class="card">
+        <img src="vix.jpeg" alt="Vix Premium">
+        <div class="card-body">
+          <span class="badge">VIX PREMIUM · PERFIL PERSONAL</span>
+          <h3>Vix Premium</h3>
+          <div class="precio">$7.400</div>
+          <p class="descripcion">Ofrece novelas, series y contenido latino. Ideal para quienes buscan entretenimiento en español y producciones regionales.</p>
+          <ul class="extras">
+            <li><strong>Series famosas:</strong> El Dragón, María Félix</li>
+            <li><strong>Recomendadas:</strong> Novelas clásicas, series latinas populares</li>
+          </ul>
+          <div class="beneficios">
+            <p>✅ Perfil personal</p>
+            <p>✅ 30 días de servicio</p>
+            <p>✅ Activación inmediata</p>
+          </div>
+          <div class="pago">💳 Pagos por Nequi o Daviplata</div>
+          <a class="boton" href="https://wa.me/573508563073?text=Hola,%20quiero%20comprar%20Vix%20Premium" target="_blank"><span>Comprar por WhatsApp</span></a>
+        </div>
+      </div>
+
+      <div class="card">
+        <img src="mubi.jpeg" alt="Mubi">
+        <div class="card-body">
+          <span class="badge">MUBI · PERFIL PERSONAL</span>
+          <h3>MUBI</h3>
+          <div class="precio">$8.000</div>
+          <p class="descripcion">La plataforma ideal para amantes del cine independiente, de autor y películas premiadas en festivales.</p>
+          <ul class="extras">
+            <li><strong>Contenido destacado:</strong> Cine de autor, películas premiadas en festivales</li>
+            <li><strong>Recomendadas:</strong> Decision to Leave, The Worst Person in the World</li>
+          </ul>
+          <div class="beneficios">
+            <p>✅ Perfil personal</p>
+            <p>✅ 30 días de servicio</p>
+            <p>✅ Activación rápida</p>
+          </div>
+          <div class="pago">💳 Pagos por Nequi o Daviplata</div>
+          <a class="boton" href="https://wa.me/573508563073?text=Hola,%20quiero%20comprar%20MUBI" target="_blank"><span>Comprar por WhatsApp</span></a>
+        </div>
+      </div>
+
+      <div class="card">
+        <img src="spotify.jpeg" alt="Spotify Premium">
+        <div class="card-body">
+          <span class="badge">SPOTIFY PREMIUM · PERFIL PERSONAL</span>
+          <h3>Spotify</h3>
+          <div class="precio">$10.000</div>
+          <p class="descripcion">Escucha millones de canciones sin anuncios, con acceso a playlists, podcasts y música personalizada.</p>
+          <ul class="extras">
+            <li><strong>Artistas populares:</strong> Bad Bunny, Karol G, Feid, Drake</li>
+            <li><strong>Incluye:</strong> música, podcasts y playlists personalizadas</li>
+          </ul>
+          <div class="beneficios">
+            <p>✅ Cuenta Premium</p>
+            <p>✅ 30 días de servicio</p>
+          </div>
+          <div class="pago">💳 Pagos por Nequi o Daviplata</div>
+          <a class="boton" href="https://wa.me/573508563073?text=Hola,%20quiero%20comprar%20Spotify%20Premium" target="_blank"><span>Comprar por WhatsApp</span></a>
+        </div>
+      </div>
+
+      <div class="card">
+        <img src="youtube.jpeg" alt="YouTube Premium">
+        <div class="card-body">
+          <span class="badge">YOUTUBE PREMIUM · PERFIL PERSONAL</span>
+          <h3>YouTube Premium</h3>
+          <div class="precio">$10.000</div>
+          <p class="descripcion">Disfruta YouTube sin anuncios y con reproducción en segundo plano. Ideal para quienes usan YouTube todos los días.</p>
+          <ul class="extras">
+            <li><strong>Incluye:</strong> YouTube Music, videos sin publicidad, descargas offline</li>
+          </ul>
+          <div class="beneficios">
+            <p>✅ Cuenta Premium</p>
+            <p>✅ 30 días de servicio</p>
+          </div>
+          <div class="pago">💳 Pagos por Nequi o Daviplata</div>
+          <a class="boton" href="https://wa.me/573508563073?text=Hola,%20quiero%20comprar%20YouTube%20Premium" target="_b
